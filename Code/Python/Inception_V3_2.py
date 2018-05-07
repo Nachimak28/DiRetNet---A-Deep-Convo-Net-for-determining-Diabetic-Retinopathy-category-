@@ -25,7 +25,7 @@ tic = time.time()
 size = 299
 #epochs = 50
 import os
-os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'        #this if one does not want to set up an environment variable in the CMD
 
 a = input("Already trained the model? Y/n: ")           #asking user if the model is already trained or not, If 'n' then the training starts, if 'Y' then pretrained model is loaded 
 
@@ -102,7 +102,7 @@ if a == 'n':
 
 
     
-    model.save('tp3.h5')
+    model.save('DR_model.h5')
     
     def plot_training(history):
         acc = history.history['acc']
@@ -125,7 +125,6 @@ if a == 'n':
 
 elif a == 'Y':
     model = load_model('Inception_retrained.h5')                 #loading a saved model
-    model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
     
     print('Weights and model loaded')
 
@@ -144,7 +143,14 @@ elif a == 'Y':
 #x = preprocess_input(x)
 test_data = ImageDataGenerator(rescale = 1./255,samplewise_std_normalization=True)       #preprocessing and real tiime data augmentation of test set images
 X_pred = test_data.flow_from_directory('C:/Users/nachiket/Desktop/SEM_8/BE_project/Codes/predict',shuffle = False,target_size = (size, size),batch_size = 64,class_mode = None)       #Creates a DirectoryIterator object  for getting images from the directory specified with images in sub directories 0,1,2,3,4 for train set 
-op = model.predict_generator(X_pred)     #predicting for single image
+op = model.predict_generator(X_pred)     #predicting for single image residing in each folder of the above directory
+print(op)
+
+'''
+The predict method gives wrong results when the functional API of Keras is used for taking the dataset input and training.
+Instead, use predict generator 
+'''
+
 #op = model.predict(x)
 #print(op)
 #print(np.round_(op,4))
