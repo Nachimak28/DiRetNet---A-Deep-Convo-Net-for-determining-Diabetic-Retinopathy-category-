@@ -1,7 +1,7 @@
 # DiRetNet---A-Deep-Convo-Net-for-determining-Diabetic-Retinopathy-category-
 A deep Convolutional Neural Network made and trained using Keras
 
-Inspired by the research done by the Google Nrain team showcased in the TensorFlow Dev Summit 
+Inspired by the research done by the Google Brain team showcased in the TensorFlow Dev Summit 
 
 The dataset used for this project is from the Kaggle competition on Determining Diabetic Retinopathy(0,1,2,3,4) from Retinal images  
 
