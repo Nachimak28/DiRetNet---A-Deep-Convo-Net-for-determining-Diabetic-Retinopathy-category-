@@ -17,6 +17,7 @@ from keras.applications.imagenet_utils import preprocess_input
 #import scipy.misc
 from matplotlib.pyplot import imshow
 from keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing import image
 import keras.backend as K
 K.set_image_data_format('channels_last')
 K.set_learning_phase(1)
@@ -63,6 +64,13 @@ op = model.predict_generator(X_pred)     #predicting for single image
 #plot_model(dr_model, to_file='DRModel.png')
 #SVG(model_to_dot(dr_model).create(prog='dot', format='svg'))
 #print(np.round_(op*100,4))
+
+# right way to get predictions from single image
+# test_image = image.load_img(path=image_path, target_size=(299, 299))
+# test_image = image.img_to_array(test_image)
+# test_image = np.expand_dims(test_image,axis=0)
+# result = model.predict(test_image/255)
+
 
 y_pred = []
 for i in range(len(op)):
